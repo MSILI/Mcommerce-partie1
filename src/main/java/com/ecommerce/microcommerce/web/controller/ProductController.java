@@ -23,6 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ecommerce.microcommerce.dao.ProductDao;
 import com.ecommerce.microcommerce.model.Product;
+import com.ecommerce.microcommerce.web.exceptions.ProduitGratuitException;
 import com.ecommerce.microcommerce.web.exceptions.ProduitIntrouvableException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -82,6 +83,8 @@ public class ProductController {
 
 		if (productAdded == null)
 			return ResponseEntity.noContent().build();
+		if (product.getPrix() == 0)
+			throw new ProduitGratuitException("Le produit " + product.getNom() + " est gratuit");
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(productAdded.getId()).toUri();
@@ -110,7 +113,7 @@ public class ProductController {
 
 	@GetMapping("/AdminProduits")
 	public MappingJacksonValue calculerMargeProduit() {
-		
+
 		Iterable<Product> produits = productDao.findAll();
 		Map<Product, Integer> porduitAvecMarge = new HashMap<>();
 		produits.forEach(product -> {
@@ -124,10 +127,10 @@ public class ProductController {
 
 		return produitsFiltres;
 	}
-	
+
 	@GetMapping("/ProduitsParOrdreAlphabetique")
-	public MappingJacksonValue  trierProduitsParOrdreAlphabetique() {
-		
+	public MappingJacksonValue trierProduitsParOrdreAlphabetique() {
+
 		List<Product> listDesProduits = this.productDao.findAllByOrderByNomAsc();
 		SimpleBeanPropertyFilter monFiltre = SimpleBeanPropertyFilter.serializeAllExcept("");
 		FilterProvider listDeNosFiltres = new SimpleFilterProvider().addFilter("monFiltreDynamique", monFiltre);
