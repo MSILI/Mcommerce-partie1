@@ -1,0 +1,62 @@
+{
+	"variables": [],
+	"info": {
+		"name": "microcomerce-api",
+		"_postman_id": "2ed02ef7-f81e-dec5-d7f9-0a5beeaa2b34",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9090/AdminProduits",
+			"request": {
+				"url": "http://localhost:9090/AdminProduits",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nom\": \"Macbook-pro-11987xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n    \"prix\": 800.0,\n    \"prixAchat\": 780.0\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9090/ProduitsParOrdreAlphabetique",
+			"request": {
+				"url": "http://localhost:9090/ProduitsParOrdreAlphabetique",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9090/Produits",
+			"request": {
+				"url": "http://localhost:9090/Produits",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"id\": 4,\n        \"nom\": \"testtestetstets\",\n        \"prix\": 0,\n        \"prixAchat\": 0\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
